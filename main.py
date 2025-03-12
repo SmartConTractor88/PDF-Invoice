@@ -13,13 +13,18 @@ for filepath in filepaths:
     pdf.add_page()
 
     filename = Path(filepath).stem # extract the file name
-    invoice_nr = filename.split("-")
+    invoice_nr = filename.split("-")[0]
+    invoice_date = filename.split("-")[1]
     # print(f"Invoice nr.{invoice_nr[0]}")
 
     pdf.set_font(family="Times", style="B", size=20)
     pdf.set_text_color(0, 0, 0)
-    pdf.cell(w=50, h=8, txt=f"Invoice nr.{invoice_nr[0]}", align="C", ln=1, border=0)
+    pdf.cell(w=0, h=8, txt=f"Invoice nr.{invoice_nr}", align="C", ln=1, border=0)
 
-    pdf.output(f"PDFs/Invoice{invoice_nr[0]}.pdf")
+    pdf.set_font(family="Times", style="B", size=16)
+    pdf.set_text_color(0, 0, 0)
+    pdf.cell(w=0, h=18, txt=invoice_date, align="L", ln=1, border=1)
+
+    pdf.output(f"PDFs/Invoice{invoice_nr}.pdf")
 
     #print(df)
